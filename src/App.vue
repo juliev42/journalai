@@ -4,11 +4,11 @@ import HelloWorld from '@/views/HelloWorld.vue'
 
 <template lang="pug">
 div
-  a(href='https://vitejs.dev' target='_blank')
-    img.logo(src='/vite.svg' alt='Vite logo')
-  a(href='https://vuejs.org/' target='_blank')
-    img.logo.vue(src='./assets/vue.svg' alt='Vue logo')
-HelloWorld(msg='Vite + Vue')
+  a(href="https://vitejs.dev" target="_blank" rel="noopener noreferrer" class="hidden")
+    img.logo(src="/vite.svg" alt="Vite logo")
+  a(href="https://vuejs.org/" target="_blank")
+    img.logo.vue(src="./assets/vue.svg" alt="Vue logo")
+HelloWorld(msg="Vite + Vue")
 </template>
 
 <style scoped>

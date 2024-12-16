@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import TestModal from "../components/TestModal.vue";
+import TestModal from "@/components/TestModal.vue";
 
 defineProps<{ msg: string }>()
 

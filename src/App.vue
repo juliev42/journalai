@@ -1,5 +1,12 @@
-<script setup lang="ts">
-import HelloWorld from '@/views/HelloWorld.vue'
+<script lang="ts">
+import HelloWorld from '@/views/HelloWorld.vue';
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+  },
+};
 </script>
 
 <template lang="pug">

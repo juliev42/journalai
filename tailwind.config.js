@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme'
+import flowbitePlugin from 'flowbite/plugin'
 
 export default {
   content: [
@@ -17,6 +18,6 @@ export default {
     }
   },
   plugins: [
-    require('flowbite/plugin')
+    flowbitePlugin
   ],
 }

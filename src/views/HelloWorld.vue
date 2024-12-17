@@ -25,7 +25,7 @@ p
   | .
 p.read-the-docs Click on the Vite and Vue logos to learn more
 button(data-modal-target="test-modal" data-modal-toggle="test-modal") ModalTest
-TestModal()
+TestModal
 </template>
 
 <style scoped>

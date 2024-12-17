@@ -1,21 +1,20 @@
 <script lang="ts">
-import HelloWorld from '@/views/HelloWorld.vue';
+import TheHome from "./views/TheHome.vue";
+import TheNavbar from "@/components/TheNavbar.vue";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    TheNavbar,
+    TheHome,
   },
 };
 </script>
 
 <template lang="pug">
-div
-  a(href="https://vitejs.dev" target="_blank" rel="noopener noreferrer" class="hidden")
-    img.logo(src="/vite.svg" alt="Vite logo")
-  a(href="https://vuejs.org/" target="_blank")
-    img.logo.vue(src="@/assets/vue.svg" alt="Vue logo")
-HelloWorld(msg="Vite + Vue")
+.min-h-screen.min-w-screen.flex.flex-col
+  TheNavbar
+  TheHome
 </template>
 
 <style scoped>

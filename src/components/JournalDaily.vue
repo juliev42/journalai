@@ -3,10 +3,11 @@ import {defineComponent} from 'vue'
 import JournalTodoList from "@/components/JournalTodoList.vue";
 import JournalQuestion from "@/components/JournalQuestion.vue";
 import JournalEntry from "@/components/JournalEntry.vue";
+import AppModal from "@/components/AppModal.vue";
 
 export default defineComponent({
   name: "JournalDaily",
-  components: {JournalEntry, JournalQuestion, JournalTodoList}
+  components: {AppModal, JournalEntry, JournalQuestion, JournalTodoList}
 })
 </script>
 
@@ -34,6 +35,15 @@ export default defineComponent({
     div
       | Monthly
       JournalTodoList
+  AppModal(id="testModal")
+    template(#button)
+      | Test Modal
+    template(#header)
+      | Header
+    template(#body)
+      | Body
+    template(#footer)
+      | Footer
 </template>
 
 <style scoped>

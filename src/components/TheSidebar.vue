@@ -1,8 +1,10 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import AppAccordion from "@/components/AppAccordion.vue";
 
 export default defineComponent({
-  name: "TheSidebar"
+  name: "TheSidebar",
+  components: {AppAccordion}
 })
 </script>
 
@@ -14,26 +16,21 @@ button.inline-flex.items-center.p-2.mt-2.ms-3.text-sm.text-gray-500.rounded-lg(d
 aside.z-40.w-64.transition-transform.-translate-x-full.items-stretch(class="sm:translate-x-0" aria-label="Sidebar")
   .h-full.px-3.py-4.overflow-y-auto.bg-gray-50(class="dark:bg-gray-800")
     ul
-      li
-        | Some Month
-        ul.space-y-2.font-medium
-          li(v-for="title in ['Week of 10/x - 10/y', 'Week of 10/x-7 - 10/y-7']" :key="title")
-            button.flex.items-center.w-full.p-2.text-base.text-gray-900.transition.duration-75.rounded-lg.group(type="button" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example")
-              span.flex-1.ms-3.text-left.whitespace-nowrap(class="rtl:text-right")
-                | {{ title }}
-              svg.w-3.h-3(aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6")
-                path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4")
-            ul#dropdown-example.hidden.py-2.space-y-2
-              li
-                a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.pl-11.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700") Products
-              li
-                a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.pl-11.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700") Billing
-              li
-                a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.pl-11.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700") Invoice
-          li
-            button.bg-blue-200
-              | Start next week. Weekly todos become frozen in prev weeks
-
+      li(v-for="(month, monthIndex) in ['Jan', 'Feb', 'March']" :key="month")
+        AppAccordion(:id="`accordion-month-${monthIndex}`")
+          template(#header)
+            | {{ month }}
+          template(#body)
+            ul.space-y-2.font-medium
+              li(v-for="[weekStart, weekEnd] in [[1, 7], [8, 14]]" :key="weekStart")
+                AppAccordion(:id="`accordion-month-${monthIndex}-week-${weekStart}`")
+                  template(#header)
+                    | {{ `${monthIndex + 1}/${weekStart} - ${monthIndex + 1}/${weekEnd}` }}
+                  template(#body)
+                    ul.py-2.space-y-2
+                      li(v-for="day in (weekEnd - weekStart + 1)" :key="day")
+                        a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.pl-11.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700")
+                          | Day {{ day + weekStart - 1 }}
 </template>
 
 <style scoped>

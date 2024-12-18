@@ -1,20 +1,20 @@
 <script lang="ts">
-import TheHome from "./views/TheHome.vue";
+import TheJournal from "./views/TheJournal.vue";
 import TheNavbar from "@/components/TheNavbar.vue";
 
 export default {
   name: 'App',
   components: {
     TheNavbar,
-    TheHome,
+    TheJournal,
   },
 };
 </script>
 
 <template lang="pug">
-.min-h-screen.min-w-screen.flex.flex-col
+.h-screen.w-screen.flex.flex-col
   TheNavbar
-  TheHome
+  TheJournal
 </template>
 
 <style scoped>

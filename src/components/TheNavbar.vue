@@ -17,16 +17,11 @@ nav.bg-white.w-full.z-20.border-b.border-gray-200(class="dark:bg-gray-900 dark:b
         span.sr-only Open main menu
         svg.w-5.h-5(aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 17 14")
           path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15")
-    #navbar-sticky.items-center.justify-between.hidden.w-full(class="md:flex md:w-auto md:order-1")
+    .items-center.justify-between.hidden.w-full(class="md:flex md:w-auto md:order-1")
       ul.flex.flex-col.p-4.mt-4.font-medium.border.border-gray-100.rounded-lg.bg-gray-50(class="md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700")
-        li
-          a.block.py-2.px-3.text-white.bg-blue-700.rounded( class="md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page") Home
-        li
-          a.block.py-2.px-3.text-gray-900.rounded( class="hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700") About
-        li
-          a.block.py-2.px-3.text-gray-900.rounded( class="hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700") Services
-        li
-          a.block.py-2.px-3.text-gray-900.rounded( class="hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700") Contact
+        li(v-for="name in ['Journal', 'Templates', 'Trends']" :key="name")
+          a.block.py-2.px-3.text-white.bg-blue-700.rounded(class="md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page")
+            | {{ name }}
 </template>
 
 <style scoped>

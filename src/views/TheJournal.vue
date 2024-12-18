@@ -1,18 +1,18 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import TheSidebar from "@/components/TheSidebar.vue";
+import JournalDaily from "@/components/JournalDaily.vue";
 
 export default defineComponent({
-  name: "TheHome",
-  components: {TheSidebar}
+  name: "TheJournal",
+  components: {JournalDaily, TheSidebar}
 })
 </script>
 
 <template lang="pug">
-.flex-1.flex
+main.flex-1.items-stretch.min-h-0.flex
   TheSidebar
-  main.bg-gray-300.flex-1
-    | Body
+  JournalDaily
 </template>
 
 <style scoped>

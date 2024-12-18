@@ -3,10 +3,11 @@ import {defineComponent} from 'vue'
 import JournalTodoList from "@/components/JournalTodoList.vue";
 import JournalQuestion from "@/components/JournalQuestion.vue";
 import JournalEntry from "@/components/JournalEntry.vue";
+import JournalHabitList from "@/components/JournalHabitList.vue";
 
 export default defineComponent({
   name: "JournalDaily",
-  components: {JournalEntry, JournalQuestion, JournalTodoList}
+  components: {JournalHabitList, JournalEntry, JournalQuestion, JournalTodoList}
 })
 </script>
 
@@ -34,6 +35,7 @@ export default defineComponent({
     div
       | Monthly
       JournalTodoList
+  JournalHabitList
 </template>
 
 <style scoped>

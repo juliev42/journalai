@@ -34,7 +34,7 @@ aside.z-40.w-64.transition-transform.-translate-x-full.items-stretch(:id="id" cl
                   template(#body)
                     ul.py-2.space-y-2
                       li(v-for="day in (weekEnd - weekStart + 1)" :key="day")
-                        a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.pl-11.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700")
+                        a.flex.items-center.w-full.p-2.text-gray-900.transition.duration-75.rounded-lg.group(href="#" class="hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700")
                           | Day {{ day + weekStart - 1 }}
 </template>
 

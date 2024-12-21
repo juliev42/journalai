@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+import {initDropdowns} from "flowbite";
 
 export type DropdownMenu = {
   title: string,
@@ -22,6 +23,9 @@ export default defineComponent({
       type: Array as PropType<DropdownMenu[]>,
       required: true,
     }
+  },
+  mounted() {
+    initDropdowns()
   }
 })
 </script>

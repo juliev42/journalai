@@ -9,6 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { fas } from "@fortawesome/free-solid-svg-icons"
 
 import './assets/main.scss'
+import {mockPopulateStores} from "@/mockData.ts";
 
 library.add(fas)
 
@@ -18,8 +19,13 @@ pinia.use(({ store }) => {
         store.loadSettings();
     }
 });
+
 createApp(App)
     .use(pinia)
     .use(router)
     .component('FontAwesomeIcon', FontAwesomeIcon)
     .mount('#app')
+
+if (import.meta.env.DEV) {
+    mockPopulateStores();
+}

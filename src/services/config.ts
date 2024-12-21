@@ -1,6 +1,5 @@
-// api/config.ts
-const baseUrl = import.meta.env.VITE_SERVER_URL
-    ? `https://${import.meta.env.VITE_SERVER_URL}`
+const baseUrl = import.meta.env.JOURNAL_ID_SERVER_URL
+    ? `https://${import.meta.env.JOURNAL_AI_SERVER_URL}`
     : 'http://localhost:3000';
 
 export const apiUrl = `${baseUrl}/api`;
@@ -19,5 +18,5 @@ export async function doFetch<T>(input: RequestInfo, init?: RequestInit): Promis
         const text = await response.text();
         throw new Error(text || `Request failed with status ${response.status}`);
     }
-    return response.json() as Promise<T>;
+    return await response.json() as Promise<T>;
 }

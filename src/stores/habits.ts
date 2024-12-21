@@ -18,45 +18,44 @@ export const useHabitsStore = defineStore('habits', {
         },
 
         /******************************
-         * Read
+         * READ
          ******************************/
         getAll() {
             return Object.values(this.habits);
         },
         findOneById(id: number) {
-            return this.habits[id]
+            return this.habits[id];
         },
         findManyByJournalId(journalId: number) {
             return Object.values(this.habits).filter(habit => habit.journalId === journalId);
         },
 
         /******************************
-         * Update
+         * UPDATE
          ******************************/
         addOne(habit: Habit) {
             this.habits[habit.id] = habit;
         },
         addMany(habits: Habit[]) {
             for (const habit of habits) {
-                this.habits[habit.id] = habit
+                this.habits[habit.id] = habit;
             }
         },
 
         /******************************
-         * Delete
+         * DELETE
          ******************************/
         deleteOneById(id: number) {
             delete this.habits[id];
         },
         deleteManyByJournalId(journalId: number) {
-            const habits = this.findManyByJournalId(journalId)
-
+            const habits = this.findManyByJournalId(journalId);
             for (const habit of habits) {
                 delete this.habits[habit.id];
             }
         },
         deleteAll() {
-            this.habits = {}
+            this.habits = {};
         }
     }
 });

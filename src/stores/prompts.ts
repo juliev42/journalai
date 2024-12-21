@@ -6,24 +6,56 @@ export const usePromptsStore = defineStore('prompts', {
         prompts: {} as { [id: number]: Prompt }
     }),
     actions: {
-        getAll() {
-            return Object.values(this.prompts);
-        },
-        getOneById(id: number) {
-            return this.prompts[id];
-        },
-        getByJournalId(journalId: number) {
-            return Object.values(this.prompts).filter(prompt => prompt.journalId === journalId);
-        },
-        setAll(prompts: Prompt[]) {
+        /******************************
+         * CREATE
+         ******************************/
+        set(prompts: Prompt[]) {
             const newPrompts = {} as { [id: number]: Prompt };
             for (const prompt of prompts) {
                 newPrompts[prompt.id] = prompt;
             }
             this.prompts = newPrompts;
         },
-        setOne(prompt: Prompt) {
+
+        /******************************
+         * READ
+         ******************************/
+        getAll() {
+            return Object.values(this.prompts);
+        },
+        findOneById(id: number) {
+            return this.prompts[id];
+        },
+        findManyByJournalId(journalId: number) {
+            return Object.values(this.prompts).filter(p => p.journalId === journalId);
+        },
+
+        /******************************
+         * UPDATE
+         ******************************/
+        addOne(prompt: Prompt) {
             this.prompts[prompt.id] = prompt;
+        },
+        addMany(prompts: Prompt[]) {
+            for (const prompt of prompts) {
+                this.prompts[prompt.id] = prompt;
+            }
+        },
+
+        /******************************
+         * DELETE
+         ******************************/
+        deleteOneById(id: number) {
+            delete this.prompts[id];
+        },
+        deleteManyByJournalId(journalId: number) {
+            const prompts = this.findManyByJournalId(journalId);
+            for (const prompt of prompts) {
+                delete this.prompts[prompt.id];
+            }
+        },
+        deleteAll() {
+            this.prompts = {};
         }
     }
 });

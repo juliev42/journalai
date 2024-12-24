@@ -17,7 +17,6 @@ const mockUsers: User[] = [
 const mockJournals: Journal[] = [
     {
         id: 1,
-        parentJournalId: null,
         userId: 1,
         type: Periodicity.daily,
         date: new Date('2024-01-01'),
@@ -26,7 +25,6 @@ const mockJournals: Journal[] = [
     },
     {
         id: 2,
-        parentJournalId: null,
         userId: 1,
         type: Periodicity.weekly,
         date: new Date('2024-01-07'),

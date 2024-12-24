@@ -11,12 +11,12 @@ export const defaultHeaders = {
 };
 
 // Optional: A small fetch wrapper that handles errors
-export async function doFetch<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
+export async function doFetch(input: RequestInfo, init?: RequestInit): Promise<object> {
     const response = await fetch(input, init);
     if (!response.ok) {
         // Optionally handle specific HTTP status codes
         const text = await response.text();
         throw new Error(text || `Request failed with status ${response.status}`);
     }
-    return await response.json() as Promise<T>;
+    return await response.json()
 }

@@ -1,4 +1,3 @@
-// api/habits.ts
 import { Habit } from '@/types/api';
 import { useHabitsStore } from '@/stores/habits';
 import { apiUrl, defaultHeaders, doFetch } from './config';
@@ -7,7 +6,7 @@ const habitsUrl = `${apiUrl}/habits`;
 
 export async function fetchAllHabits(): Promise<void> {
     const store = useHabitsStore();
-    const data: Habit[] = await doFetch<Habit[]>(habitsUrl, {
+    const data: JSON = await doFetch<Habit[]>(habitsUrl, {
         method: 'GET',
         headers: defaultHeaders,
     });

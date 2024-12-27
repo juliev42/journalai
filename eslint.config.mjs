@@ -29,9 +29,7 @@ export default typescriptEslint.config(
             },
         },
         rules: {
-            'vue/max-attributes-per-line': [
-                'off'
-            ],
+            'vue/max-attributes-per-line': 'off',
         },
     },
 );

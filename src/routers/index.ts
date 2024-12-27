@@ -1,18 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import TheJournal from '@/views/TheJournal.vue'
 
-type Route = {
-    params: {
-        journalId: string
-    }
-}
-
-const routes = [
+const routes: RouteRecordRaw[] = [
     {
-        path: '/journals/:journalId',
+        path: '/',
+        redirect: {
+            name: 'journals'
+        }
+    },
+    {
+        path: '/journals/:journalId?',
         name: 'journals',
         component: TheJournal,
-        props: (route: Route) => ({ journalId: Number(route.params.journalId) }),
+        props: route => {
+            return {journalId: route.params.journalId ? Number.parseInt(route.params.journalId as string) : null}
+        },
     },
 ]
 

@@ -1,12 +1,12 @@
 <script lang="ts">
-import TheJournal from "./views/TheJournal.vue";
 import TheNavbar from "@/components/TheNavbar.vue";
+import {RouterView} from "vue-router";
 
 export default {
   name: 'App',
   components: {
     TheNavbar,
-    TheJournal,
+    RouterView,
   },
 };
 </script>
@@ -14,7 +14,7 @@ export default {
 <template lang="pug">
 .h-screen.w-screen.flex.flex-col
   TheNavbar
-  TheJournal
+  RouterView
 </template>
 
 <style scoped>

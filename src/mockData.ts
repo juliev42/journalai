@@ -20,7 +20,7 @@ const mockJournals: Journal[] = [
         userId: 1,
         type: Periodicity.daily,
         date: new Date('2024-01-01'),
-        title: 'First day of the year',
+        title: 'Journal 1',
         content: 'Today I started something new.'
     },
     {
@@ -28,7 +28,7 @@ const mockJournals: Journal[] = [
         userId: 1,
         type: Periodicity.weekly,
         date: new Date('2024-01-07'),
-        title: 'First week overview',
+        title: 'Journal 2',
         content: 'The week went well.'
     },
 ];

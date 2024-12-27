@@ -60,10 +60,10 @@ export default class JournalServices {
     }
 
     /***************
-     * Destroy
+     * Delete
      ***************/
 
-    static async destroy(id: number): Promise<void> {
+    static async delete(id: number): Promise<void> {
         const store = useJournalsStore();
         const url = `${journalsUrl}/${id}`;
         await doFetch(url, {
@@ -73,10 +73,6 @@ export default class JournalServices {
         store.deleteOneById(id);
     }
 }
-
-/***************
- * Helpers
- ***************/
 
 function storeJournalData(data: object) {
     const journalsStore = useJournalsStore();

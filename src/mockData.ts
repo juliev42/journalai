@@ -50,7 +50,9 @@ const mockPromptTemplates: PromptTemplate[] = [
 // Todos
 const mockTodos: Todo[] = [
     { id: 1, journalId: 1, title: 'Buy groceries', complete: false },
-    { id: 2, journalId: 2, title: 'Write a blog post', complete: true },
+    { id: 2, journalId: 1, title: 'Buy groceries 2', complete: false },
+    { id: 3, journalId: 2, title: 'Write a blog post', complete: true },
+    { id: 4, journalId: 2, title: 'Write a blog post 2', complete: true },
 ];
 
 // Habits

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import TheSidebar from "@/components/TheSidebar.vue";
 import JournalEntry from "@/components/JournalEntry.vue";
-import JournalTodoList from "@/components/JournalTodoList.vue";
+import JournalTodos from "@/components/JournalTodos.vue";
 import JournalHabitList from "@/components/JournalHabitList.vue";
 import {useJournalsStore} from "@/stores/journals.ts";
 import {computed, ref} from "vue";
@@ -57,17 +57,18 @@ async function update(newContent: string) {
         <!-- Todos-->
         <div class="grid grid-cols-3">
           <div>
-            Daily
-            <JournalTodoList />
-            <button class="bg-blue-200">Import from yesterday (1-time)</button>
+            <h4 class="capitalize">
+              {{ journal.type }}
+            </h4>
+            <JournalTodos :journal-id="journal.id" />
           </div>
           <div>
             Weekly
-            <JournalTodoList />
+            <JournalTodos :journal-id="journal.id" />
           </div>
           <div>
             Monthly
-            <JournalTodoList />
+            <JournalTodos :journal-id="journal.id" />
           </div>
         </div>
         <JournalHabitList />

@@ -59,10 +59,10 @@ export default class PromptServices {
     }
 
     /***************
-     * Destroy
+     * Delete
      ***************/
 
-    static async destroy(id: number): Promise<void> {
+    static async delete(id: number): Promise<void> {
         const store = usePromptsStore();
         const url = `${promptsUrl}/${id}`;
         await doFetch(url, {
@@ -71,11 +71,6 @@ export default class PromptServices {
         });
         store.deleteOneById(id);
     }
-
-    /***************
-     * Helpers
-     ***************/
-
 }
 
 function storePromptData(data: object) {

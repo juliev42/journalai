@@ -5,75 +5,80 @@ import { apiUrl, defaultHeaders, doFetch } from './config';
 import {useHabitsStore} from "@/stores/habits.ts";
 import {useTodosStore} from "@/stores/todos.ts";
 
-export const journalsUrl = `${apiUrl}/journals`;
+const journalsUrl = `${apiUrl}/journals`;
 
-/***************
- * Create
- ***************/
+export default class JournalServices {
+    /***************
+     * Create
+     ***************/
 
-export async function create(payload: Omit<Journal, 'id'>) {
-    const data = await doFetch(journalsUrl, {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(payload),
-    });
-    storeJournalData(data)
-}
+    static async create(payload: Omit<Journal, 'id'>) {
+        const data = await doFetch(journalsUrl, {
+            method: 'POST',
+            headers: defaultHeaders,
+            body: JSON.stringify(payload),
+        });
+        storeJournalData(data)
+    }
 
-/***************
- * Read
- ***************/
+    /***************
+     * Read
+     ***************/
 
-export async function getAll() {
-    const data = await doFetch(journalsUrl, {
-        method: 'GET',
-        headers: defaultHeaders,
-    });
-    storeJournalData(data)
-}
+    static async getAll() {
+        const data = await doFetch(journalsUrl, {
+            method: 'GET',
+            headers: defaultHeaders,
+        });
+        storeJournalData(data)
+    }
 
-export async function getOneByPeriodicityAndDate(type: Periodicity, date: Date) {
-    const url = `${journalsUrl}/${type}/${date}`;
-    const data = await doFetch(url, {
-        method: 'GET',
-        headers: defaultHeaders,
-    });
-    storeJournalData(data)
-}
+    static async getOneByPeriodicityAndDate(type: Periodicity, date: Date) {
+        const url = `${journalsUrl}/${type}/${date}`;
+        const data = await doFetch(url, {
+            method: 'GET',
+            headers: defaultHeaders,
+        });
+        storeJournalData(data)
+    }
 
-/***************
- * Update
- ***************/
+    /***************
+     * Update
+     ***************/
 
-export async function update(type: Periodicity, date: Date, updates: Partial<Journal>) {
-    const url = `${journalsUrl}/${type}/${date}`;
-    const data = await doFetch(url, {
-        method: 'PUT',
-        headers: defaultHeaders,
-        body: JSON.stringify(updates),
-    });
-    storeJournalData(data)
-}
+    static async update(id: number, updates: Omit<Journal, "id">) {
+        const data = { journal: { ...updates, id } }
 
-/***************
- * Destroy
- ***************/
+        // const url = `${journalsUrl}/${id}`;
+        // const data = await doFetch(url, {
+        //     method: 'PUT',
+        //     headers: defaultHeaders,
+        //     body: JSON.stringify(updates),
+        // });
 
-export async function destroy(id: number): Promise<void> {
-    const store = useJournalsStore();
-    const url = `${journalsUrl}/${id}`;
-    await doFetch(url, {
-        method: 'DELETE',
-        headers: defaultHeaders,
-    });
-    store.deleteOneById(id);
+        storeJournalData(data)
+    }
+
+    /***************
+     * Destroy
+     ***************/
+
+    static async destroy(id: number): Promise<void> {
+        const store = useJournalsStore();
+        const url = `${journalsUrl}/${id}`;
+        await doFetch(url, {
+            method: 'DELETE',
+            headers: defaultHeaders,
+        });
+        store.deleteOneById(id);
+    }
 }
 
 /***************
  * Helpers
  ***************/
 
-export function storeJournalData(data: object) {
+function storeJournalData(data: object) {
     const journalsStore = useJournalsStore();
     const habitsStore = useHabitsStore();
     const todosStore = useTodosStore();

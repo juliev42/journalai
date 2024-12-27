@@ -4,8 +4,9 @@ import JournalEntry from "@/components/JournalEntry.vue";
 import JournalTodoList from "@/components/JournalTodoList.vue";
 import JournalHabitList from "@/components/JournalHabitList.vue";
 import {useJournalsStore} from "@/stores/journals.ts";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import JournalPrompts from "@/components/JournalPrompts.vue";
+import JournalServices from "@/services/journal.ts";
 
 const props = defineProps({
   journalId: {
@@ -24,6 +25,17 @@ const journal = computed(() => {
       return journalsStore.findOneById(props.journalId)
     }
 })
+
+// Non-reactive local response
+const localContent = ref(journal.value?.content)
+
+async function update(newContent: string) {
+  if (journal.value) {
+    const newJournal = { ...journal.value, content: newContent }
+    await JournalServices.update(journal.value.id, newJournal)
+  }
+}
+
 </script>
 
 <template>
@@ -38,7 +50,7 @@ const journal = computed(() => {
           <!-- Left Page-->
           <div class="flex-1 flex flex-col min-w-0 p-4 border-r-2 border-gray-400">
             Free Form Log
-            <JournalEntry />
+            <JournalEntry v-model="localContent" @update:model-value="update" />
           </div>
           <!-- Right Page-->
           <JournalPrompts :journal-id="journal.id" />

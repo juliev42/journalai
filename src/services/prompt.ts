@@ -46,17 +46,15 @@ export default class PromptServices {
      ***************/
 
     static async update(id: number, updates: Partial<Prompt>) {
-        let data: object;
-        if (import.meta.env.DEV) {
-            data = { prompt: { ...updates, id } }
-        } else {
-            const url = `${promptsUrl}/${id}`;
-            data = await doFetch(url, {
-                method: 'PUT',
-                headers: defaultHeaders,
-                body: JSON.stringify(updates),
-            });
-        }
+        const data = { prompt: { ...updates, id } }
+
+        // const url = `${promptsUrl}/${id}`;
+        // const data = await doFetch(url, {
+        //     method: 'PUT',
+        //     headers: defaultHeaders,
+        //     body: JSON.stringify(updates),
+        // });
+
         storePromptData(data);
     }
 

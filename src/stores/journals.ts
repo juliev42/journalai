@@ -23,6 +23,12 @@ export const useJournalsStore = defineStore('journals', {
         findAll(): Journal[] {
             return Object.values(this.journals);
         },
+        findManyByPeriodicity(periodicity: Periodicity): Journal[] {
+            return Object.values(this.journals).filter(journal => journal.type === periodicity)
+        },
+        findManyByParentId(parentId: number) {
+            return Object.values(this.journals).filter(journal => journal.parentJournalId === parentId);
+        },
         findOneById(id: number): Journal | undefined {
             return this.journals[id];
         },

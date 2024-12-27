@@ -6,6 +6,7 @@ import {usePromptTemplatesStore} from "@/stores/promptTemplates.ts";
 import {useTodosStore} from "@/stores/todos.ts";
 import {useHabitsStore} from "@/stores/habits.ts";
 import {useHabitTemplatesStore} from "@/stores/habitTemplates.ts";
+import Helpers from "@/helpers.ts";
 
 // Users
 const mockUsers: User[] = [
@@ -28,7 +29,7 @@ const weeklyJournal: Journal = {
     userId: 1,
     parentJournalId: 3,
     type: Periodicity.weekly,
-    date: getSunday(dailyJournal.date),
+    date: Helpers.getSunday(dailyJournal.date),
     title: 'Weekly Journal',
     content: 'The week went well.'
 }
@@ -37,7 +38,7 @@ const monthlyJournal: Journal = {
     userId: 1,
     parentJournalId: 4,
     type: Periodicity.monthly,
-    date: new Date(dailyJournal.date.getFullYear(), dailyJournal.date.getMonth()),
+    date: dailyJournal.date,
     title: 'Monthly Journal',
     content: 'The monthly journal went well.'
 }
@@ -45,7 +46,7 @@ const yearlyJournal: Journal = {
     id: 4,
     userId: 1,
     type: Periodicity.yearly,
-    date: new Date(dailyJournal.date.getFullYear()),
+    date: dailyJournal.date,
     title: 'Yearly Journal',
     content: 'The yearly journal went well.'
 }
@@ -59,10 +60,10 @@ const mockJournals: Journal[] = [
 
 // Prompts
 const mockPrompts: Prompt[] = [
-    { id: 1, journalId: 1, prompt: 'What did you learn today?', response: 'I learned about Vue 3.' },
-    { id: 2, journalId: 1, prompt: 'How do you feel?', response: 'Great!' },
-    { id: 3, journalId: 2, prompt: 'What did you learn today?', response: 'I learned about Vue 3.' },
-    { id: 4, journalId: 2, prompt: 'How do you feel?', response: 'Great!' },
+    { id: 1, journalId: 1, prompt: 'Daily Prompt?', response: 'I learned about Vue 3.' },
+    { id: 2, journalId: 2, prompt: 'Weekly Prompt?', response: 'Great!' },
+    { id: 3, journalId: 3, prompt: 'Monthly Prompt?', response: 'I learned about Vue 3.' },
+    { id: 4, journalId: 4, prompt: 'Yearly Prompt?', response: 'Great!' },
 ];
 
 // PromptTemplates
@@ -107,9 +108,4 @@ export function mockPopulateStores() {
     todosStore.set(mockTodos);
     habitsStore.set(mockHabits);
     habitTemplatesStore.set(mockHabitTemplates);
-}
-
-function getSunday(d: Date) {
-    const day = d.getDay(), diff = d.getDate() - day
-    return new Date(d.setDate(diff));
 }

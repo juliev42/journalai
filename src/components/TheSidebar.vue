@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import AppAccordion from "@/components/AppAccordion.vue";
 import {useJournalsStore} from "@/stores/journals.ts";
+import {Periodicity} from "@/types/api.ts";
+import Helpers from "@/helpers.ts";
+import SidebarJournalSelector from "@/components/SidebarJournalSelector.vue";
 
 const id = 'the-sidebar';
 
@@ -13,8 +16,7 @@ defineProps({
 })
 
 const journalsStore = useJournalsStore()
-const journals = journalsStore.findAll()
-
+const yearlyJournals = journalsStore.findManyByPeriodicity(Periodicity.yearly).sort((a, b) => a.date > b.date ? -1 : 1)
 </script>
 
 <template>
@@ -47,41 +49,12 @@ const journals = journalsStore.findAll()
   >
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
       <ul>
-        <li
-          v-for="(month, monthIndex) in ['Jan', 'Feb', 'March']"
-          :key="month"
-        >
-          <AppAccordion :id="`accordion-month-${monthIndex}`">
-            <template #header>{{ month }}</template>
-            <template #body>
-              <ul class="space-y-2 font-medium">
-                <li
-                  v-for="[weekStart, weekEnd] in [[1, 7], [8, 14]]"
-                  :key="weekStart"
-                >
-                  <AppAccordion :id="`accordion-month-${monthIndex}-week-${weekStart}`">
-                    <template #header>{{ `${monthIndex + 1}/${weekStart} - ${monthIndex + 1}/${weekEnd}` }}</template>
-                    <template #body>
-                      <ul class="py-2 space-y-2">
-                        <li
-                          v-for="day in (weekEnd - weekStart + 1)"
-                          :key="day"
-                        >
-                          <a
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                            href="#"
-                          >
-                            Day {{ day + weekStart - 1 }}
-                          </a>
-                        </li>
-                      </ul>
-                    </template>
-                  </AppAccordion>
-                </li>
-              </ul>
-            </template>
-          </AppAccordion>
-        </li>
+        <SidebarJournalSelector
+          v-for="journal of yearlyJournals"
+          :key="journal.id"
+          :journal-id="journal.id"
+          :active-journal-id="activeJournalId"
+        />
       </ul>
     </div>
   </aside>

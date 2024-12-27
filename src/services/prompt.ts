@@ -5,69 +5,88 @@ import { apiUrl, defaultHeaders, doFetch } from './config';
 
 const promptsUrl = `${apiUrl}/prompts`;
 
-/**
- * GET /prompts
- */
-export async function fetchAllPrompts(): Promise<void> {
-    const store = usePromptsStore();
-    const data: Prompt[] = await doFetch<Prompt[]>(promptsUrl, {
-        method: 'GET',
-        headers: defaultHeaders,
-    });
-    store.set(data);
+export default class PromptServices {
+
+    /***************
+     * Create
+     ***************/
+
+    static async create(payload: Omit<Prompt, 'id'>) {
+        const data = await doFetch(promptsUrl, {
+            method: 'POST',
+            headers: defaultHeaders,
+            body: JSON.stringify(payload),
+        });
+        storePromptData(data)
+    }
+
+    /***************
+     * Read
+     ***************/
+
+    static async getAll(): Promise<void> {
+        const data = await doFetch(promptsUrl, {
+            method: 'GET',
+            headers: defaultHeaders,
+        });
+        storePromptData(data)
+    }
+
+    static async getOneById(id: number): Promise<void> {
+        const url = `${promptsUrl}/${id}`;
+        const data = await doFetch(url, {
+            method: 'GET',
+            headers: defaultHeaders,
+        });
+        storePromptData(data);
+    }
+
+    /***************
+     * Update
+     ***************/
+
+    static async update(id: number, updates: Partial<Prompt>) {
+        let data: object;
+        if (import.meta.env.DEV) {
+            data = { prompt: { ...updates, id } }
+        } else {
+            const url = `${promptsUrl}/${id}`;
+            data = await doFetch(url, {
+                method: 'PUT',
+                headers: defaultHeaders,
+                body: JSON.stringify(updates),
+            });
+        }
+        storePromptData(data);
+    }
+
+    /***************
+     * Destroy
+     ***************/
+
+    static async destroy(id: number): Promise<void> {
+        const store = usePromptsStore();
+        const url = `${promptsUrl}/${id}`;
+        await doFetch(url, {
+            method: 'DELETE',
+            headers: defaultHeaders,
+        });
+        store.deleteOneById(id);
+    }
+
+    /***************
+     * Helpers
+     ***************/
+
 }
 
-/**
- * GET /prompts/:id
- */
-export async function fetchPrompt(id: number): Promise<void> {
-    const store = usePromptsStore();
-    const url = `${promptsUrl}/${id}`;
-    const prompt: Prompt = await doFetch<Prompt>(url, {
-        method: 'GET',
-        headers: defaultHeaders,
-    });
-    store.addOne(prompt);
-}
+function storePromptData(data: object) {
+    const promptsStore = usePromptsStore();
 
-/**
- * POST /prompts
- */
-export async function createPrompt(payload: Omit<Prompt, 'id'>): Promise<Prompt> {
-    const store = usePromptsStore();
-    const prompt: Prompt = await doFetch<Prompt>(promptsUrl, {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify(payload),
-    });
-    store.addOne(prompt);
-    return prompt;
-}
-
-/**
- * PUT /prompts/:id
- */
-export async function updatePrompt(id: number, updates: Partial<Prompt>): Promise<Prompt> {
-    const store = usePromptsStore();
-    const url = `${promptsUrl}/${id}`;
-    const updated: Prompt = await doFetch<Prompt>(url, {
-        method: 'PUT',
-        headers: defaultHeaders,
-        body: JSON.stringify(updates),
-    });
-    store.addOne(updated);
-    return updated;
-}
-
-/**
- * DELETE /prompts/:id
- */
-export async function deletePrompt(id: number): Promise<void> {
-    const store = usePromptsStore();
-    const url = `${promptsUrl}/${id}`;
-    await doFetch<void>(url, {
-        method: 'DELETE',
-        headers: defaultHeaders,
-    });
-    store.deleteOneById(id);
+    if ('prompt' in data && data.prompt) {
+        promptsStore.addOne(data.prompt as Prompt);
+    }
+    if ('prompts' in data && data.prompts) {
+        promptsStore.addMany(data.prompts as Prompt[])
+    }
 }

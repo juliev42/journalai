@@ -37,6 +37,8 @@ const mockJournals: Journal[] = [
 const mockPrompts: Prompt[] = [
     { id: 1, journalId: 1, prompt: 'What did you learn today?', response: 'I learned about Vue 3.' },
     { id: 2, journalId: 1, prompt: 'How do you feel?', response: 'Great!' },
+    { id: 3, journalId: 2, prompt: 'What did you learn today?', response: 'I learned about Vue 3.' },
+    { id: 4, journalId: 2, prompt: 'How do you feel?', response: 'Great!' },
 ];
 
 // PromptTemplates

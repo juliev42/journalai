@@ -32,7 +32,7 @@ export async function getAll() {
     storeJournalData(data)
 }
 
-export async function getOne(type: Periodicity, date: Date) {
+export async function getOneByPeriodicityAndDate(type: Periodicity, date: Date) {
     const url = `${journalsUrl}/${type}/${date}`;
     const data = await doFetch(url, {
         method: 'GET',

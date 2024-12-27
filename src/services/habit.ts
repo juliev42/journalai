@@ -49,7 +49,7 @@ export async function updateHabit(id: number, updates: Partial<Habit>): Promise<
 export async function deleteHabit(id: number): Promise<void> {
     const store = useHabitsStore();
     const url = `${habitsUrl}/${id}`;
-    await doFetch<void>(url, {
+    await doFetch(url, {
         method: 'DELETE',
         headers: defaultHeaders,
     });

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import TheSidebar from "@/components/TheSidebar.vue";
 import JournalEntry from "@/components/JournalEntry.vue";
-import JournalQuestion from "@/components/JournalQuestion.vue";
 import JournalTodoList from "@/components/JournalTodoList.vue";
 import JournalHabitList from "@/components/JournalHabitList.vue";
 import {useJournalsStore} from "@/stores/journals.ts";
 import {computed} from "vue";
+import JournalPrompts from "@/components/JournalPrompts.vue";
 
 const props = defineProps({
   journalId: {
@@ -41,9 +41,7 @@ const journal = computed(() => {
             <JournalEntry />
           </div>
           <!-- Right Page-->
-          <div class="flex-1 flex flex-col min-w-0 p-4 overflow-scroll">
-            <JournalQuestion v-for="x in 10" :key="x" />
-          </div>
+          <JournalPrompts :journal-id="journal.id" />
         </div>
         <!-- Todos-->
         <div class="grid grid-cols-3">

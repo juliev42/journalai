@@ -1,13 +1,11 @@
-<script lang="ts">
-import {defineComponent} from 'vue'
+<script lang="ts" setup>
 
-export default defineComponent({
-  name: "JournalEntry"
-})
+const model = defineModel<string>()
+
 </script>
 
-<template lang="pug">
-textarea.flex-1(placeholder="Journal form entry")
+<template>
+  <textarea v-model="model" class="flex-1" placeholder="Journal Entry" />
 </template>
 
 <style scoped>

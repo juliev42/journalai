@@ -48,6 +48,7 @@ export interface Habit {
 export interface Journal {
     id: number,
     userId: number,
+    parentJournalId?: number,
     type: Periodicity,
     date: Date,
     title: string,

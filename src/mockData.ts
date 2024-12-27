@@ -14,23 +14,47 @@ const mockUsers: User[] = [
 ];
 
 // Journals
+const dailyJournal: Journal = {
+    id: 1,
+    userId: 1,
+    type: Periodicity.daily,
+    parentJournalId: 2,
+    date: new Date(2024, 1, 2),
+    title: 'Daily Journal',
+    content: 'Today I started something new.'
+}
+const weeklyJournal: Journal = {
+    id: 2,
+    userId: 1,
+    parentJournalId: 3,
+    type: Periodicity.weekly,
+    date: getSunday(dailyJournal.date),
+    title: 'Weekly Journal',
+    content: 'The week went well.'
+}
+const monthlyJournal: Journal = {
+    id: 3,
+    userId: 1,
+    parentJournalId: 4,
+    type: Periodicity.monthly,
+    date: new Date(dailyJournal.date.getFullYear(), dailyJournal.date.getMonth()),
+    title: 'Monthly Journal',
+    content: 'The monthly journal went well.'
+}
+const yearlyJournal: Journal = {
+    id: 4,
+    userId: 1,
+    type: Periodicity.yearly,
+    date: new Date(dailyJournal.date.getFullYear()),
+    title: 'Yearly Journal',
+    content: 'The yearly journal went well.'
+}
+
 const mockJournals: Journal[] = [
-    {
-        id: 1,
-        userId: 1,
-        type: Periodicity.daily,
-        date: new Date('2024-01-01'),
-        title: 'Journal 1',
-        content: 'Today I started something new.'
-    },
-    {
-        id: 2,
-        userId: 1,
-        type: Periodicity.weekly,
-        date: new Date('2024-01-07'),
-        title: 'Journal 2',
-        content: 'The week went well.'
-    },
+    dailyJournal,
+    weeklyJournal,
+    monthlyJournal,
+    yearlyJournal
 ];
 
 // Prompts
@@ -83,4 +107,9 @@ export function mockPopulateStores() {
     todosStore.set(mockTodos);
     habitsStore.set(mockHabits);
     habitTemplatesStore.set(mockHabitTemplates);
+}
+
+function getSunday(d: Date) {
+    const day = d.getDay(), diff = d.getDate() - day
+    return new Date(d.setDate(diff));
 }

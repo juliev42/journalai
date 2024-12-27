@@ -26,7 +26,10 @@ async function update(newResponse: string) {
     <h4>
       {{ prompt.prompt }}
     </h4>
-    <JournalEntry v-model="localResponse" @update:model-value="update" />
+    <JournalEntry
+v-model="localResponse"
+@update:model-value="update"
+/>
   </div>
 </template>
 

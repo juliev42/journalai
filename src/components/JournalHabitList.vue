@@ -8,9 +8,13 @@ export default defineComponent({
 
 <template lang="pug">
 .flex
-  .flex-1.flex.flex-col.p-2.items-center(v-for="habit in ['meditate', 'run', 'journal', 'habit5']" :key="habit")
+  .flex-1.flex.flex-col.p-2.items-center(
+v-for="habit in ['meditate', 'run', 'journal', 'habit5']"
+:key="habit")
     | {{ habit }}
-    input(type="checkbox" :value="habit")
+    input(
+type="checkbox"
+:value="habit")
 </template>
 
 <style scoped>

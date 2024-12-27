@@ -17,7 +17,11 @@ const prompts = computed(() => promptsStore.findManyByJournalId(props.journalId)
 
 <template>
   <div class="flex-1 flex flex-col min-w-0 p-4 overflow-scroll">
-    <JournalPrompt v-for="prompt in prompts" :key="prompt.id" :prompt="prompt" />
+    <JournalPrompt
+v-for="prompt in prompts"
+:key="prompt.id"
+:prompt="prompt"
+/>
   </div>
 </template>
 

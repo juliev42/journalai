@@ -18,7 +18,14 @@ async function update() {
 
 <template>
   <label>
-    <input class="mr-2" name="todolist" type="checkbox" :value="todo.title" :checked="todo.complete" @change="update" />
+    <input
+class="mr-2"
+name="todolist"
+type="checkbox"
+:value="todo.title"
+:checked="todo.complete"
+@change="update"
+/>
     {{ todo.title }}
   </label>
 </template>

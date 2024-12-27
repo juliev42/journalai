@@ -18,7 +18,11 @@ const todos = computed(() => todosStore.findManyByJournalId(props.journalId))
 
 <template>
   <div class="flex flex-col">
-    <JournalTodo v-for="todo of todos" :key="todo.id" :todo="todo" />
+    <JournalTodo
+v-for="todo of todos"
+:key="todo.id"
+:todo="todo"
+/>
     <JournalTodoForm />
   </div>
 </template>

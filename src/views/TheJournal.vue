@@ -41,7 +41,9 @@ async function update(newContent: string) {
 <template>
   <main class="flex-1 items-stretch min-h-0 flex">
     <TheSidebar />
-    <template v-if="journal === undefined">Create is here. Choose existing on right {{ JSON.stringify(journalId) }}</template>
+    <template v-if="journal === undefined">
+      Create is here. Choose existing on right {{ JSON.stringify(journalId) }}
+    </template>
     <template v-else>
       <div class="flex flex-col bg-gray-300 flex-1 p-4 min-h-0">
         <!-- Main Journal-->
@@ -49,7 +51,10 @@ async function update(newContent: string) {
           <!-- Left Page-->
           <div class="flex-1 flex flex-col min-w-0 p-4 border-r-2 border-gray-400">
             {{ journal.title }}
-            <JournalEntry v-model="localContent" @update:model-value="update" />
+            <JournalEntry
+              v-model="localContent"
+              @update:model-value="update"
+            />
           </div>
           <!-- Right Page-->
           <JournalPrompts :journal-id="journal.id" />

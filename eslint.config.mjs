@@ -28,8 +28,5 @@ export default typescriptEslint.config(
                 parser: typescriptEslint.parser,
             },
         },
-        rules: {
-            'vue/max-attributes-per-line': 'off',
-        },
     },
 );
